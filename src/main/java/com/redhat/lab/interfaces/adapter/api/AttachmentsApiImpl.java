@@ -2,7 +2,6 @@ package com.redhat.lab.interfaces.adapter.api;
 
 import com.redhat.lab.interfaces.dto.Attachment;
 import com.redhat.lab.interfaces.dto.AttachmentCaseMapping;
-import com.redhat.lab.interfaces.dto.Message;
 import com.redhat.lab.interfaces.dto.NewAttachment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,7 @@ public class AttachmentsApiImpl implements AttachmentsApi {
 
     @Override
     public ResponseEntity<Void> attachmentsAttachmentIdPut(String attachmentId, String attachmentId2, String attaKind, String updateTime, MultipartFile content) {
+        System.out.println("test");
         return null;
     }
 

@@ -14,11 +14,30 @@ import java.util.Objects;
 @ApiModel(description = "attachment")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T11:54:45.004751+08:00[Asia/Taipei]")
 public class NewAttachment   {
+  @JsonProperty("caseId")
+  private String caseId;
+
   @JsonProperty("attaKind")
   private String attaKind;
 
   @JsonProperty("content")
   private String content;
+
+  public NewAttachment caseId(String caseId) {
+    this.caseId = caseId;
+    return this;
+  }
+
+  @ApiModelProperty(required = true, value = "caseId")
+  @NotNull
+  @Valid
+  public String getCaseId() {
+    return this.caseId;
+  }
+
+  public void setCaseId(String caseId) {
+    this.caseId = caseId;
+  }
 
   public NewAttachment attaKind(String attaKind) {
     this.attaKind = attaKind;
