@@ -45,12 +45,14 @@ public class NewAttachment   {
   }
 
   /**
-   * 附件類別:A:正面/B:反面
+   * 附件類別:
+   * ID_POSITIVE, // 身份證正面
+   * ID_NEGATIVE, // 身份證反面
+   * HEALTH // 健保卡
+   *
    * @return attaKind
   */
-  @ApiModelProperty(value = "附件類別:A:正面/B:反面")
-
-
+  @ApiModelProperty(value = "ID_POSITIVE, // 身份證正面 * ID_NEGATIVE, // 身份證反面 * HEALTH // 健保卡")
   public String getAttaKind() {
     return attaKind;
   }

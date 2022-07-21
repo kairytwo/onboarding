@@ -1,17 +1,25 @@
 package com.redhat.lab.interfaces.adapter.api;
 
-import com.redhat.lab.infrastructure.common.api.CaseService;
+import com.redhat.lab.core.domain.entity.BasicInfoDo;
+import com.redhat.lab.core.domain.entity.CaseDo;
 import com.redhat.lab.interfaces.dto.*;
+import com.redhat.lab.usecase.OnboardingApplicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+import static com.redhat.lab.interfaces.converter.Converter.*;
+
 @Controller
 public class CaseApiImpl implements CasesApi {
 
-    CaseService caseService;
+    OnboardingApplicationService onboardingApplicationService;
+
+    public CaseApiImpl(OnboardingApplicationService onboardingApplicationService) {
+        this.onboardingApplicationService = onboardingApplicationService;
+    }
 
     @Override
     public ResponseEntity<BasicInfo> casesCaseIdBasicInfoGet(String caseId) {
@@ -20,22 +28,13 @@ public class CaseApiImpl implements CasesApi {
 
     @Override
     public ResponseEntity<BasicInfo> casesCaseIdBasicInfoPost(String caseId, NewBasicInfo newBasicInfo) {
-        BasicInfo basicInfo = new BasicInfo();
-        basicInfo.setCaseId(caseId);
-        basicInfo.setAddress(newBasicInfo.getAddress());
-        basicInfo.setCreateTime("1994/06/26T08:23:21Z");
-        basicInfo.setCellPhone(newBasicInfo.getCellPhone());
-        basicInfo.setBirthDay(newBasicInfo.getBirthDay());
-        basicInfo.setCreditCardVerification(newBasicInfo.getCreditCardVerification());
-        basicInfo.setEarthId(newBasicInfo.getEarthId());
-        basicInfo.setEmail(newBasicInfo.getEmail());
-        basicInfo.setEnglishName(newBasicInfo.getEnglishName());
-        basicInfo.setName(newBasicInfo.getName());
-        basicInfo.setNation(newBasicInfo.getNation());
-        basicInfo.setUpdateTime(null);
+        BasicInfoDo basicInfoDo = newBasicInfoToBasicInfoDo(caseId, newBasicInfo);
+        CaseDo aCaseDo = onboardingApplicationService.writeBasicInfo(caseId, basicInfoDo, newBasicInfo.getCardNo(), newBasicInfo.getCardValidDate());
+        BasicInfo basicInfo = caseToBasicInfo(aCaseDo);
 
         return new ResponseEntity<>(basicInfo, HttpStatus.OK);
     }
+
 
     @Override
     public ResponseEntity<Message> casesCaseIdBasicInfoPut(String caseId, BasicInfo basicInfo) {
@@ -49,7 +48,17 @@ public class CaseApiImpl implements CasesApi {
 
     @Override
     public ResponseEntity<Message> casesCaseIdStatusPut(String caseId, CaseStatus caseStatus) {
-        return null;
+        Message msg = new Message();
+        if (caseStatus.getStatus().equals("success")) {
+            onboardingApplicationService.reviewCaseSuccess(caseId);
+            msg.setMessage("review success");
+        } else if (caseStatus.getStatus().equals("failed")) {
+            onboardingApplicationService.reviewCaseFailed(caseId);
+            msg.setMessage("review failed");
+        }
+
+        ResponseEntity<Message> response = new ResponseEntity<>(msg, HttpStatus.OK);
+        return response;
     }
 
     @Override
@@ -59,13 +68,8 @@ public class CaseApiImpl implements CasesApi {
 
     @Override
     public ResponseEntity<ModelCase> casesPost(NewCase newCase) {
-        String productKind = newCase.getProductKind();
-
-        ModelCase modelCase = new ModelCase();
-        modelCase.setCaseId("aadd-aads-1231-fasda-123123");
-        modelCase.setProductKind(productKind);
-        modelCase.setCreateTime("1994/06/26T08:35:25Z");
-
+        CaseDo aCaseDo = onboardingApplicationService.raiseCase(newCase.getProductKind());
+        ModelCase modelCase = caseToModelCase(aCaseDo);
         return new ResponseEntity(modelCase, HttpStatus.OK);
     }
 
@@ -73,4 +77,5 @@ public class CaseApiImpl implements CasesApi {
     public ResponseEntity<ModelCase> findPetById(String caseId) {
         return null;
     }
+
 }

@@ -1,9 +1,9 @@
 package com.redhat.lab.core.domain.repository;
 
-import com.redhat.lab.core.domain.entity.Case;
+import com.redhat.lab.core.domain.entity.CaseDo;
 
 public interface CaseRepository {
-    Case findByCaseId(String caseId);
+    CaseDo findByCaseId(String caseId);
 
-    void save(Case aCase);
+    void save(CaseDo aCaseDo);
 }

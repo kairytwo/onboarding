@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.Date;
 import java.util.UUID;
 
-public class Account {
+public class AccountDo {
     @Getter
     private  String earthId;
 
@@ -24,10 +24,10 @@ public class Account {
     @Getter
     private Date updateTime;
 
-    private Account() { }
+    private AccountDo() { }
 
-    public static Account create(String earthId, String password, String userId){
-        Account account = new Account();
+    public static AccountDo create(String earthId, String password, String userId){
+        AccountDo account = new AccountDo();
         account.accountId = UUID.randomUUID().toString();
         account.earthId = earthId;
         account.password = password;

@@ -1,14 +1,13 @@
 package com.redhat.lab.core.domain.entity;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class Case {
+public class CaseDo {
 
     @Getter
     private String caseId;
@@ -26,10 +25,13 @@ public class Case {
     private Status status;
 
     @Getter
-    private BasicInfo basicInfo;
+    private BasicInfoDo basicInfo;
 
     @Getter
-    private List<Attachment> attachmentList;
+    private List<AttachmentDo> attachmentDoList;
+
+    @Getter
+    private CreditCardVerify creditCardVerify;
 
 
     public enum Status {
@@ -39,12 +41,12 @@ public class Case {
         COMPLETE_FAIL
     }
 
-    private Case() {
-        attachmentList = new ArrayList<>();
+    private CaseDo() {
+        attachmentDoList = new ArrayList<>();
     }
 
-    public static Case create(String productKind) {
-        Case c = new Case();
+    public static CaseDo create(String productKind) {
+        CaseDo c = new CaseDo();
         c.caseId = UUID.randomUUID().toString();
         c.productKind = productKind;
         c.createTime = new Date();
@@ -67,11 +69,15 @@ public class Case {
         this.updateTime = new Date();
     }
 
-    public void addAttachment(Attachment attachment) {
-        this.attachmentList.add(attachment);
+    public void addAttachment(AttachmentDo attachmentDo) {
+        this.attachmentDoList.add(attachmentDo);
     }
 
-    public void setBasicInfo(BasicInfo basicInfo) {
+    public void setBasicInfo(BasicInfoDo basicInfo) {
         this.basicInfo = basicInfo;
+    }
+
+    public void setCreditCardVerify(CreditCardVerify creditCardVerify) {
+        this.creditCardVerify = creditCardVerify;
     }
 }

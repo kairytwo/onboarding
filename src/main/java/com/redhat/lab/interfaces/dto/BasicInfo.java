@@ -44,9 +44,6 @@ public class BasicInfo   {
   @JsonProperty("createTime")
   private String createTime;
 
-  @JsonProperty("updateTime")
-  private String updateTime;
-
   @JsonProperty("caseId")
   private String caseId;
 
@@ -259,26 +256,6 @@ public class BasicInfo   {
     this.createTime = createTime;
   }
 
-  public BasicInfo updateTime(String updateTime) {
-    this.updateTime = updateTime;
-    return this;
-  }
-
-  /**
-   * Get updateTime
-   * @return updateTime
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getUpdateTime() {
-    return updateTime;
-  }
-
-  public void setUpdateTime(String updateTime) {
-    this.updateTime = updateTime;
-  }
-
   public BasicInfo caseId(String caseId) {
     this.caseId = caseId;
     return this;
@@ -320,13 +297,12 @@ public class BasicInfo   {
         Objects.equals(this.nation, basicInfo.nation) &&
         Objects.equals(this.creditCardVerification, basicInfo.creditCardVerification) &&
         Objects.equals(this.createTime, basicInfo.createTime) &&
-        Objects.equals(this.updateTime, basicInfo.updateTime) &&
         Objects.equals(this.caseId, basicInfo.caseId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, earthId, name, englishName, cellPhone, address, birthDay, nation, creditCardVerification, createTime, updateTime, caseId);
+    return Objects.hash(email, earthId, name, englishName, cellPhone, address, birthDay, nation, creditCardVerification, createTime, caseId);
   }
 
   @Override
@@ -344,7 +320,6 @@ public class BasicInfo   {
     sb.append("    nation: ").append(toIndentedString(nation)).append("\n");
     sb.append("    creditCardVerification: ").append(toIndentedString(creditCardVerification)).append("\n");
     sb.append("    createTime: ").append(toIndentedString(createTime)).append("\n");
-    sb.append("    updateTime: ").append(toIndentedString(updateTime)).append("\n");
     sb.append("    caseId: ").append(toIndentedString(caseId)).append("\n");
     sb.append("}");
     return sb.toString();

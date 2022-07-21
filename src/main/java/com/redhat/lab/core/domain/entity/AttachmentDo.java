@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.Date;
 import java.util.UUID;
 
-public class Attachment {
+public class AttachmentDo {
 
     @Getter
     private String attachmentId;
@@ -28,16 +28,16 @@ public class Attachment {
         HEALTH // 健保卡
     }
 
-    private Attachment() { }
+    private AttachmentDo() { }
 
-    public static Attachment create(AttaKind attaKind, String content) {
-        Attachment attachment = new Attachment();
-        attachment.attachmentId = UUID.randomUUID().toString();
-        attachment.attaKind = attaKind;
-        attachment.content = content;
-        attachment.createTime = new Date();
+    public static AttachmentDo create(AttaKind attaKind, String content) {
+        AttachmentDo attachmentDo = new AttachmentDo();
+        attachmentDo.attachmentId = UUID.randomUUID().toString();
+        attachmentDo.attaKind = attaKind;
+        attachmentDo.content = content;
+        attachmentDo.createTime = new Date();
 
-        return attachment;
+        return attachmentDo;
     }
 
     public void reUpload(String content) {

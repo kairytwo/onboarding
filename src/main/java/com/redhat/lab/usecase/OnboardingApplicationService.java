@@ -1,11 +1,13 @@
-package com.redhat.lab.core.domain.service;
+package com.redhat.lab.usecase;
 
-import com.redhat.lab.core.domain.entity.*;
-import com.redhat.lab.core.domain.exception.CaseNotExistException;
+import com.redhat.lab.core.domain.entity.AccountDo;
+import com.redhat.lab.core.domain.entity.AttachmentDo;
+import com.redhat.lab.core.domain.entity.BasicInfoDo;
+import com.redhat.lab.core.domain.entity.CaseDo;
 import com.redhat.lab.core.domain.exception.InvalidPasswordException;
 
-public interface OnboardingService {
-    // action 1
+public interface OnboardingApplicationService {
+
     CaseDo raiseCase(String productKind);
 
     // action 2
@@ -13,15 +15,11 @@ public interface OnboardingService {
 
     AccountDo createAccount(String userId, String earthId, String password) throws InvalidPasswordException;
 
-    CaseDo writeBasicInfo(String caseId, BasicInfoDo basicInfo) throws CaseNotExistException;
-
-    CaseDo setCreditCardVerify(String caseId, CreditCardVerify creditCardVerify);
+    CaseDo writeBasicInfo(String caseId, BasicInfoDo basicInfo, String cardNo, String cardValidDate);
 
     CaseDo setCaseStatusReviewing(String caseId);
 
     CaseDo reviewCaseSuccess(String caseId);
 
     CaseDo reviewCaseFailed(String caseId);
-
-
 }

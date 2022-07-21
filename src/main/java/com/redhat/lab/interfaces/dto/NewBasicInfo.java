@@ -38,8 +38,41 @@ public class NewBasicInfo   {
   @JsonProperty("nation")
   private String nation;
 
-  @JsonProperty("creditCardVerification")
-  private CreditCardVerification creditCardVerification;
+  @JsonProperty("cardNo")
+  private String cardNo;
+
+  @JsonProperty("cardValidDate")
+  private String cardValidDate;
+
+  public NewBasicInfo cardNo(String cardNo) {
+    this.cardNo = cardNo;
+    return this;
+  }
+
+  public void setCardNo(String cardNo) {
+    this.cardNo = cardNo;
+  }
+
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+  public String getCardNo() {
+    return this.cardNo;
+  }
+
+  public NewBasicInfo cardValidDate(String cardValidDate) {
+    this.cardValidDate = cardValidDate;
+    return this;
+  }
+
+  public void setCardValidDate(String cardValidDate) {
+    this.cardValidDate = cardValidDate;
+  }
+
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+  public String getCardValidDate() {
+    return this.cardValidDate;
+  }
 
   public NewBasicInfo email(String email) {
     this.email = email;
@@ -207,28 +240,6 @@ public class NewBasicInfo   {
     this.nation = nation;
   }
 
-  public NewBasicInfo creditCardVerification(CreditCardVerification creditCardVerification) {
-    this.creditCardVerification = creditCardVerification;
-    return this;
-  }
-
-  /**
-   * Get creditCardVerification
-   * @return creditCardVerification
-  */
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @Valid
-
-  public CreditCardVerification getCreditCardVerification() {
-    return creditCardVerification;
-  }
-
-  public void setCreditCardVerification(CreditCardVerification creditCardVerification) {
-    this.creditCardVerification = creditCardVerification;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -245,13 +256,12 @@ public class NewBasicInfo   {
         Objects.equals(this.cellPhone, newBasicInfo.cellPhone) &&
         Objects.equals(this.address, newBasicInfo.address) &&
         Objects.equals(this.birthDay, newBasicInfo.birthDay) &&
-        Objects.equals(this.nation, newBasicInfo.nation) &&
-        Objects.equals(this.creditCardVerification, newBasicInfo.creditCardVerification);
+        Objects.equals(this.nation, newBasicInfo.nation) ;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, earthId, name, englishName, cellPhone, address, birthDay, nation, creditCardVerification);
+    return Objects.hash(email, earthId, name, englishName, cellPhone, address, birthDay, nation);
   }
 
   @Override
@@ -267,7 +277,6 @@ public class NewBasicInfo   {
     sb.append("    address: ").append(toIndentedString(address)).append("\n");
     sb.append("    birthDay: ").append(toIndentedString(birthDay)).append("\n");
     sb.append("    nation: ").append(toIndentedString(nation)).append("\n");
-    sb.append("    creditCardVerification: ").append(toIndentedString(creditCardVerification)).append("\n");
     sb.append("}");
     return sb.toString();
   }

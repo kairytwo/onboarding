@@ -10,34 +10,11 @@ import java.util.Objects;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T11:54:45.004751+08:00[Asia/Taipei]")
 public class CaseStatus   {
-  @JsonProperty("caseId")
-  private String caseId;
-
   @JsonProperty("status")
   private String status;
 
   @JsonProperty("description")
   private String description;
-
-  public CaseStatus caseId(String caseId) {
-    this.caseId = caseId;
-    return this;
-  }
-
-  /**
-   * Get caseId
-   * @return caseId
-  */
-  @ApiModelProperty(value = "")
-
-
-  public String getCaseId() {
-    return caseId;
-  }
-
-  public void setCaseId(String caseId) {
-    this.caseId = caseId;
-  }
 
   public CaseStatus status(String status) {
     this.status = status;
@@ -89,14 +66,13 @@ public class CaseStatus   {
       return false;
     }
     CaseStatus caseStatus = (CaseStatus) o;
-    return Objects.equals(this.caseId, caseStatus.caseId) &&
-        Objects.equals(this.status, caseStatus.status) &&
+    return Objects.equals(this.status, caseStatus.status) &&
         Objects.equals(this.description, caseStatus.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(caseId, status, description);
+    return Objects.hash(status, description);
   }
 
   @Override
@@ -104,7 +80,6 @@ public class CaseStatus   {
     StringBuilder sb = new StringBuilder();
     sb.append("class CaseStatus {\n");
     
-    sb.append("    caseId: ").append(toIndentedString(caseId)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
